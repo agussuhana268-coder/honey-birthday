@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#ffd1dc" />
+  <title>Happy Birthday, My Love ♡</title>
+  
+  <!-- Favicon Emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>" />
+
+  <!-- Google Fonts: Playfair Display, Caveat, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- Background Canvas untuk Kelopak Bunga & Hati Melayang -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Container IFrame YouTube Tersembunyi (Audio Background) -->
+  <div id="yt-player-container"></div>
+
+  <!-- Floating Music Player Widget -->
+  <aside class="floating-music-player" id="floating-music-player" title="Ketuk untuk putar / jeda musik">
+    <div class="vinyl-disc" id="vinyl-disc">
+      <div class="vinyl-center"></div>
+    </div>
+    <div class="music-info">
+      <span class="music-title" id="music-player-title">Our Special Song</span>
+      <span class="music-status" id="music-status">Ketuk untuk putar</span>
+    </div>
+    <button class="music-btn" id="music-toggle-btn" aria-label="Play or Pause">▶</button>
+  </aside>
+
+  <!-- =========================================================================
+       1. SPLASH SCREEN (BUKA KADO)
+       ========================================================================= -->
+  <div id="splash-screen">
+    <div class="splash-content">
+      <span class="coquette-badge" id="splash-badge">Spesial Untuk Yang Tersayang 🎀</span>
+      <h1 class="coquette-title" id="splash-title">Ada Sebuah Kado Kecil Untukmu ♡</h1>
+      <p class="coquette-subtitle" id="splash-subtitle">Seseorang yang sangat menyayangimu telah menyiapkan kejutan manis ini...</p>
+
+      <!-- 3D Gift Box Interactive -->
+      <div class="gift-box-wrapper" id="gift-wrapper" title="Ketuk kado ini untuk membukanya">
+        <div class="gift-lid">
+          <div class="gift-lid-ribbon"></div>
+          <div class="gift-bow">🎀</div>
+        </div>
+        <div class="gift-box">
+          <div class="gift-ribbon-v"></div>
+          <div class="gift-ribbon-h"></div>
+        </div>
+      </div>
+
+      <button class="btn-romantic" id="splash-btn">Buka Kado Cinta 🎁</button>
+      <button class="btn-secondary btn-romantic" id="splash-skip" style="padding: 8px 18px; font-size: 0.85rem; margin-top: 5px;">Langsung ke PIN ➔</button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. PIN SCREEN (GEMBOK HATI RAHASIA)
+       ========================================================================= -->
+  <div id="pin-screen" class="hidden">
+    <div class="pin-card" id="pin-card">
+      <div class="heart-lock" id="heart-lock">🔒</div>
+      <span class="coquette-badge" id="pin-badge">Kunci Hati Rahasia 🔒</span>
+      <h2 class="coquette-title" style="font-size: 1.6rem; margin-bottom: 4px;" id="pin-title">Masukkan PIN Cinta</h2>
+      <p class="coquette-subtitle" style="font-size: 0.88rem;" id="pin-subtitle">Hanya yang memiliki kunci hati ini yang boleh masuk ♡</p>
+      
+      <!-- Dekorasi Tanggal 18 • 10 • 08 -->
+      <div class="pin-date-tag" id="pin-date-tag">18 • 10 • 08</div>
+
+      <!-- PIN Indicator Dots -->
+      <div class="pin-dots">
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+      </div>
+
+      <div class="pin-error-text" id="pin-error"></div>
+
+      <!-- Numeric Keypad -->
+      <div class="pin-keypad">
+        <button class="key-btn" data-key="1">1</button>
+        <button class="key-btn" data-key="2">2</button>
+        <button class="key-btn" data-key="3">3</button>
+        <button class="key-btn" data-key="4">4</button>
+        <button class="key-btn" data-key="5">5</button>
+        <button class="key-btn" data-key="6">6</button>
+        <button class="key-btn" data-key="7">7</button>
+        <button class="key-btn" data-key="8">8</button>
+        <button class="key-btn" data-key="9">9</button>
+        <button class="key-btn action-btn" data-key="clear" title="Hapus Semua">C</button>
+        <button class="key-btn" data-key="0">0</button>
+        <button class="key-btn action-btn" data-key="backspace" title="Hapus Satu">⌫</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. MAIN CONTENT (WEBSITE UTAMA SETELAH TERBUKA)
+       ========================================================================= -->
+  <main id="main-content">
+    
+    <!-- SECTION 1: HERO & WISHES -->
+    <section class="hero-section" id="home">
+      <div class="container">
+        <div class="hero-card">
+          <span class="hero-bow-corner hero-bow-left">🎀</span>
+          <span class="hero-bow-corner hero-bow-right">🎀</span>
+
+          <span class="coquette-badge" id="hero-tagline">Happy Birthday to My Favorite Human 🌸</span>
+          <h1 class="coquette-title" id="hero-title">Selamat Ulang Tahun, [AYU TRI SAYANGG] ♡</h1>
+          
+          <div class="hero-date-badge" id="hero-date-badge">🌸 18 • 10 • 2008 🌸</div>
+          
+          <p class="coquette-subtitle" id="hero-subtitle">
+            Hari ini, semesta merayakan hadirnya dirimu. Dan aku merayakan hari di mana wanita paling istimewa dilahirkan ke dunia.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#letter" class="btn-romantic">Baca Surat Cinta 💌</a>
+            <a href="#gallery" class="btn-romantic btn-secondary">Galeri Kenangan 📸</a>
+          </div>
+
+          <!-- Sweet Wish Card -->
+          <div class="wish-card">
+            <h3 class="coquette-title" style="font-size: 1.4rem; color: var(--primary-dark);" id="wish-title">Doa & Harapan Terdalam</h3>
+            <p class="wish-quote" id="wish-quote">
+              "Selamat ulang tahun, sayangku. Semoga di lembaran usiamu yang baru ini, kamu selalu dihujani kebahagiaan yang membuat matamu berbinar, kedamaian yang menenangkan hatimu, dan cinta yang selalu mengingatkanmu betapa berharganya dirimu."
+            </p>
+            <div class="wish-signature" id="wish-signature">Selamanya milikmu, [KHOLIK] ♡</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INTERACTIVE BIRTHDAY CAKE -->
+    <section id="cake">
+      <div class="container">
+        <div class="section-header">
+          <span class="coquette-badge" id="cake-badge">Tiup Lilin & Harapan 🎂</span>
+          <h2 class="coquette-title" id="cake-title">Make a Birthday Wish ♡</h2>
+          <p class="coquette-subtitle" id="cake-instruction">Tutup matamu sejenak, buat satu harapan paling indah dalam hatimu, lalu tiup lilinnya ya...</p>
+          <div class="ribbon-divider">🎀</div>
+        </div>
+
+        <div class="cake-card">
+          <div class="cake-visual">
+            <div class="candle">
+              <div class="candle-flame" id="candle-flame"></div>
+            </div>
+            <div class="cake-tier-top"></div>
+            <div class="cake-tier-bottom"></div>
+            <div class="cake-plate"></div>
+          </div>
+
+          <button class="btn-romantic" id="cake-blow-btn">Tiup Lilin 🕯️</button>
+
+          <div class="cake-wish-banner" id="cake-wish-banner">
+            Semoga semua doa dan harapanmu terkabul, [SAYANGGKUU] tercinta! 🌸✨
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ROMANTIC PHOTO GALLERY -->
+    <section id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <span class="coquette-badge" id="gallery-badge">Momen Manis Kita 📸</span>
+          <h2 class="coquette-title" id="gallery-title">Galeri Kenangan Indah</h2>
+          <p class="coquette-subtitle" id="gallery-subtitle">Setiap detik yang kulalui bersamamu adalah halaman terindah dalam hidupku.</p>
+          <div class="ribbon-divider">🎀</div>
+        </div>
+
+        <!-- Polaroid Photo Grid -->
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: INTERACTIVE LOVE LETTER -->
+    <section class="letter-section" id="letter">
+      <div class="container">
+        <div class="section-header">
+          <span class="coquette-badge" id="letter-badge">Surat Dari Lubuk Hati 💌</span>
+          <h2 class="coquette-title" id="letter-title">Surat Cinta Untuk [SAYANGGKUU]</h2>
+          <p class="coquette-subtitle" id="letter-subtitle">Untaian kata yang kutulis khusus untukmu di hari bertambahnya usiamu.</p>
+          <div class="ribbon-divider">🎀</div>
+        </div>
+
+        <!-- 3D Realistic Envelope -->
+        <div class="envelope-wrapper" id="envelope-wrapper" title="Ketuk amplop ini untuk membaca surat">
+          <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="wax-seal">💌</div>
+            <div class="envelope-label" id="envelope-label">UNTUK: [AYU TRI SAYANGG] ♡</div>
+          </div>
+        </div>
+
+        <button class="btn-romantic" id="letter-open-btn">Buka Surat Cinta 💌</button>
+
+        <!-- Unfolded Romantic Parchment Letter -->
+        <div class="letter-paper-container" id="letter-paper-container">
+          <div class="letter-paper">
+            <div class="letter-stamp" id="letter-stamp">SPECIAL DELIVERY • WITH LOVE 🎀</div>
+            <div class="letter-greeting" id="letter-greeting">Untuk [AYU TRI SAYANGG], cinta dalam hidupku,</div>
+            <div class="letter-body" id="letter-body"></div>
+            <div class="letter-closing">
+              <div class="letter-closing-text" id="letter-closing-text">Dengan segenap cintaku,</div>
+              <div class="letter-signature" id="letter-signature">[KHOLIK] ♡</div>
+            </div>
+          </div>
+          <div class="letter-controls">
+            <button class="btn-romantic btn-secondary" id="letter-skip-btn">Tampilkan Semua Teks ✨</button>
+            <button class="btn-romantic btn-secondary" id="letter-reopen-btn">Lipat & Buka Ulang ✉️</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: REASONS WHY I LOVE YOU -->
+    <section id="reasons">
+      <div class="container">
+        <div class="section-header">
+          <span class="coquette-badge" id="reasons-badge">Alasan Hatiku Memilihmu 💖</span>
+          <h2 class="coquette-title" id="reasons-title">Kenapa Aku Mencintaimu?</h2>
+          <p class="coquette-subtitle" id="reasons-subtitle">Ada jutaan alasan di dunia ini, dan berikut adalah beberapa di antaranya ♡</p>
+          <div class="ribbon-divider">🎀</div>
+          <div style="margin-top: 15px;">
+            <button class="btn-romantic btn-secondary" id="reasons-flip-all" style="padding: 8px 20px; font-size: 0.88rem;">Buka Semua Kartu 💖</button>
+          </div>
+        </div>
+
+        <!-- 3D Flip Cards Grid -->
+        <div class="reasons-grid" id="reasons-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: FINAL SURPRISE & CONFETTI -->
+    <section id="surprise">
+      <div class="container">
+        <div class="surprise-card">
+          <div class="surprise-heart-icon">💝</div>
+          <span class="coquette-badge" id="surprise-badge">Satu Bisikan Terakhir 💝</span>
+          <h2 class="coquette-title" id="surprise-title">Kejutan Spesial Terakhir</h2>
+          <p class="coquette-subtitle" id="surprise-subtitle" style="margin-bottom: 24px;">
+            Sebelum harimu berganti, ketuk kotak ini untuk membuka rahasia cinta terakhir...
+          </p>
+          <button class="btn-romantic" id="surprise-open-btn" style="font-size: 1.15rem; padding: 16px 36px;">
+            Buka Kejutan Terakhir 🎁
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-bow">🎀 🌸 🎀</div>
+      <p class="footer-credit" id="footer-credit">
+        Dibuat dengan segenap cinta oleh [KHOLIK] untuk [AYU TRI SAYANGG] ♡
+      </p>
+      <p style="font-size: 0.8rem; margin-top: 6px; opacity: 0.8;">Happy Birthday [SAYANGGKUU] • Forever & Always</p>
+    </footer>
+
+    <!-- BOTTOM FLOATING NAVIGATION BAR -->
+    <nav class="bottom-nav">
+      <a href="#home" class="nav-link active">
+        <span class="nav-icon">🌸</span>
+        <span>Beranda</span>
+      </a>
+      <a href="#cake" class="nav-link">
+        <span class="nav-icon">🎂</span>
+        <span>Lilin</span>
+      </a>
+      <a href="#gallery" class="nav-link">
+        <span class="nav-icon">📸</span>
+        <span>Galeri</span>
+      </a>
+      <a href="#letter" class="nav-link">
+        <span class="nav-icon">💌</span>
+        <span>Surat</span>
+      </a>
+      <a href="#reasons" class="nav-link">
+        <span class="nav-icon">💖</span>
+        <span>Alasan</span>
+      </a>
+      <a href="#surprise" class="nav-link">
+        <span class="nav-icon">🎁</span>
+        <span>Kejutan</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- =========================================================================
+       MODALS
+       ========================================================================= -->
+
+  <!-- Lightbox Modal untuk Galeri Foto -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Tutup">✕</button>
+      <button class="lightbox-nav-btn lightbox-prev" id="lightbox-prev" aria-label="Sebelumnya">‹</button>
+      <button class="lightbox-nav-btn lightbox-next" id="lightbox-next" aria-label="Selanjutnya">›</button>
+      <img src="" alt="" class="lightbox-img" id="lightbox-img" />
+      <h3 class="lightbox-title" id="lightbox-title"></h3>
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- Surprise Modal untuk Pesan Terakhir & Confetti -->
+  <div class="surprise-modal" id="surprise-modal" role="dialog" aria-modal="true">
+    <div class="surprise-modal-dialog">
+      <div class="modal-heart-badge">💖</div>
+      <span class="coquette-badge" id="modal-badge">For My Most Precious Girl 💖</span>
+      <h3 class="modal-title" id="modal-title">Janji Cintaku Untukmu ♡</h3>
+      <p class="modal-message" id="modal-message">
+        Dari miliaran manusia di bumi, aku sangat bersyukur takdir mempertemukanku denganmu. Selamat ulang tahun, [AYU TRI SAYANGG]. Jika aku diberi kesempatan untuk mengulang waktu berkali-kali, aku akan tetap memilihmu. Hari ini, esok, dan di setiap detik dalam hidupku.
+      </p>
+      <div class="modal-signature" id="modal-signature">
+        Dibuat dengan segenap cinta, khusus untuk [AYU TRI SAYANGG] dari [KHOLIK] 💖
+      </div>
+      <button class="btn-romantic" id="modal-close-btn">Peluk Erat & Simpan di Hati ♡</button>
+    </div>
+  </div>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!-- Konfigurasi Personalisasi -->
+  <script src="./config.js"></script>
+
+  <!-- Logika Utama -->
+  <script src="./script.js"></script>
+
+</body>
+</html>
