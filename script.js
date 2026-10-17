@@ -102,6 +102,77 @@
         gain.connect(this.ctx.destination);
         noise.start();
       } catch (e) {}
+    },
+    bgmGain: null,
+    bgmPlaying: false,
+    bgmTimer: null,
+    bgmStep: 0,
+    startRomanticBGM(volume = 80) {
+      try {
+        this.init();
+        if (!this.ctx) return;
+        if (this.bgmPlaying) return;
+        this.bgmPlaying = true;
+
+        if (!this.bgmGain) {
+          this.bgmGain = this.ctx.createGain();
+          this.bgmGain.connect(this.ctx.destination);
+        }
+        this.setBGMVolume(volume);
+
+        // Melodi romantis lembut (arpeggio nada hangat Cmaj7 - Am7 - Fmaj7 - G7)
+        const sequence = [
+          [261.63, 329.63, 392.00, 523.25], // C4 - E4 - G4 - C5
+          [329.63, 392.00, 523.25, 659.25], // E4 - G4 - C5 - E5
+          [220.00, 261.63, 329.63, 440.00], // A3 - C4 - E4 - A4
+          [261.63, 329.63, 440.00, 523.25], // C4 - E4 - A4 - C5
+          [174.61, 220.00, 261.63, 349.23], // F3 - A3 - C4 - F4
+          [220.00, 261.63, 349.23, 440.00], // A3 - C4 - F4 - A4
+          [196.00, 246.94, 293.66, 392.00], // G3 - B3 - D4 - G4
+          [246.94, 293.66, 392.00, 493.88]  // B3 - D4 - G4 - B4
+        ];
+
+        this.bgmStep = 0;
+        const playNextBar = () => {
+          if (!this.bgmPlaying || !this.ctx) return;
+          const barNotes = sequence[this.bgmStep % sequence.length];
+          barNotes.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const noteGain = this.ctx.createGain();
+            const startTime = this.ctx.currentTime + idx * 0.28;
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, startTime);
+
+            noteGain.gain.setValueAtTime(0.0001, startTime);
+            noteGain.gain.exponentialRampToValueAtTime(0.12, startTime + 0.03);
+            noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.85);
+
+            osc.connect(noteGain);
+            noteGain.connect(this.bgmGain);
+
+            osc.start(startTime);
+            osc.stop(startTime + 0.88);
+          });
+
+          this.bgmStep++;
+          this.bgmTimer = setTimeout(playNextBar, 1150);
+        };
+
+        playNextBar();
+      } catch (e) {}
+    },
+    stopRomanticBGM() {
+      this.bgmPlaying = false;
+      if (this.bgmTimer) {
+        clearTimeout(this.bgmTimer);
+        this.bgmTimer = null;
+      }
+    },
+    setBGMVolume(volume) {
+      if (!this.bgmGain || !this.ctx) return;
+      const volFraction = Math.max(0, Math.min(1, volume / 100));
+      this.bgmGain.gain.setValueAtTime(volFraction * 0.25, this.ctx.currentTime);
     }
   };
 
@@ -147,6 +218,7 @@
     setText('#pin-title', config.pinPage?.title);
     setText('#pin-subtitle', config.pinPage?.subtitle);
     setText('#pin-date-tag', config.pinDisplayHint || '18 • 10 • 08');
+    setText('#pin-hint', config.pinHintText || 'Gunakan tanggal spesial kita ♡');
 
     // Hero Section
     setText('#hero-tagline', replacePlaceholders(config.hero?.tagline));
@@ -218,6 +290,7 @@
 
     // Footer
     setText('#footer-credit', `Dibuat dengan segenap cinta oleh ${config.senderName} untuk ${config.girlfriendName} ♡`);
+    setText('#footer-tagline', `Happy Birthday ${config.nickname || '[SAYANGGKUU]'} • Forever & Always`);
   }
 
   /* ==========================================================================
@@ -394,11 +467,12 @@
     const blowBtn = document.getElementById('cake-blow-btn');
     const flame = document.getElementById('candle-flame');
     const wishBanner = document.getElementById('cake-wish-banner');
+    const cakeVisual = document.querySelector('.cake-visual');
     let blownOut = false;
 
     if (!blowBtn || !flame) return;
 
-    blowBtn.addEventListener('click', () => {
+    function toggleCandle() {
       if (!blownOut) {
         // Tiup lilin
         AudioFX.playBlow();
@@ -415,7 +489,12 @@
         blowBtn.textContent = config.cake?.blowButtonText || 'Tiup Lilin 🕯️';
         blownOut = false;
       }
-    });
+    }
+
+    blowBtn.addEventListener('click', toggleCandle);
+    if (cakeVisual) {
+      cakeVisual.addEventListener('click', toggleCandle);
+    }
   }
 
   /* ==========================================================================
@@ -494,6 +573,30 @@
         if (e.key === 'ArrowRight') navigateLightbox(1);
       }
     });
+
+    // Dukungan Swipe Layar Sentuh di HP
+    let touchStartX = 0;
+    modal.addEventListener('touchstart', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].screenX;
+      }
+    }, { passive: true });
+
+    modal.addEventListener('touchend', (e) => {
+      if (!modal.classList.contains('active')) return;
+      if (e.changedTouches && e.changedTouches[0]) {
+        const touchEndX = e.changedTouches[0].screenX;
+        const diffX = touchEndX - touchStartX;
+        if (Math.abs(diffX) > 45) {
+          AudioFX.playTap();
+          if (diffX < 0) {
+            navigateLightbox(1); // Geser kiri -> Foto Berikutnya
+          } else {
+            navigateLightbox(-1); // Geser kanan -> Foto Sebelumnya
+          }
+        }
+      }
+    }, { passive: true });
   }
 
   function openLightbox(index) {
@@ -567,9 +670,9 @@
       let pIdx = 0;
       let charIdx = 0;
 
-      const pElement = document.createElement('p');
-      pElement.className = 'typewriter-active';
-      letterBody.appendChild(pElement);
+      let currentP = document.createElement('p');
+      currentP.className = 'typewriter-active';
+      letterBody.appendChild(currentP);
 
       function typeChar() {
         if (!state.isTyping) return;
@@ -583,18 +686,18 @@
         const text = paragraphs[pIdx];
         if (charIdx < text.length) {
           const char = text.charAt(charIdx);
-          pElement.textContent += char;
+          currentP.textContent += char;
           charIdx++;
           const delay = char === '.' || char === '!' || char === '?' ? 180 : char === ',' ? 90 : 22;
           state.typewriterTimeout = setTimeout(typeChar, delay);
         } else {
-          pElement.classList.remove('typewriter-active');
+          currentP.classList.remove('typewriter-active');
           pIdx++;
           charIdx = 0;
           if (pIdx < paragraphs.length) {
-            const nextP = document.createElement('p');
-            nextP.className = 'typewriter-active';
-            letterBody.appendChild(nextP);
+            currentP = document.createElement('p');
+            currentP.className = 'typewriter-active';
+            letterBody.appendChild(currentP);
             state.typewriterTimeout = setTimeout(typeChar, 280);
           } else {
             state.isTyping = false;
@@ -697,9 +800,17 @@
 
     grid.innerHTML = '';
 
+    // Ambil daftar kupon yang sudah pernah diklaim dari LocalStorage
+    let claimedIds = [];
+    try {
+      const saved = localStorage.getItem('honey_claimed_coupons');
+      if (saved) claimedIds = JSON.parse(saved);
+    } catch (e) {}
+
     items.forEach((item) => {
+      const isAlreadyClaimed = Array.isArray(claimedIds) && claimedIds.includes(item.id);
       const card = document.createElement('div');
-      card.className = 'coupon-card';
+      card.className = `coupon-card ${isAlreadyClaimed ? 'claimed' : ''}`;
       card.innerHTML = `
         <div class="coupon-stamp">✓ TERKLAIM</div>
         <div>
@@ -709,19 +820,30 @@
         </div>
         <div class="coupon-footer">
           <span class="coupon-validity">${item.validity || 'Berlaku Selamanya ♡'}</span>
-          <button class="coupon-claim-btn">Klaim Kupon 🎀</button>
+          <button class="coupon-claim-btn">${isAlreadyClaimed ? 'Terklaim 💖' : 'Klaim Kupon 🎀'}</button>
         </div>
       `;
 
       const claimBtn = card.querySelector('.coupon-claim-btn');
-      claimBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
+
+      function claimCoupon(e) {
+        if (e) e.stopPropagation();
         if (card.classList.contains('claimed')) return;
         card.classList.add('claimed');
         claimBtn.textContent = 'Terklaim 💖';
         AudioFX.playUnlock();
         fireConfetti({ particleCount: 30, spread: 60 });
-      });
+
+        try {
+          if (!claimedIds.includes(item.id)) {
+            claimedIds.push(item.id);
+            localStorage.setItem('honey_claimed_coupons', JSON.stringify(claimedIds));
+          }
+        } catch (err) {}
+      }
+
+      claimBtn.addEventListener('click', claimCoupon);
+      card.addEventListener('click', claimCoupon);
 
       grid.appendChild(card);
     });
@@ -781,16 +903,44 @@
         document.body.style.overflow = '';
       }
     });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        AudioFX.playTap();
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
   }
 
   /* ==========================================================================
-     11. MUSIK LATAR (YOUTUBE BACKGROUND PLAYER & VOLUME CONTROL)
+     11. MUSIK LATAR (UNIFIED ENGINE: AUDIO HTML5, YOUTUBE & BGM SYNTHESIZER)
      ========================================================================== */
   let ytPlayer = null;
+  let ytPlayerReady = false;
+  let useFallbackBGM = false;
+  let currentVolume = config.music?.defaultVolume !== undefined ? config.music.defaultVolume : 80;
+  let isMuted = false;
+
+  const html5Audio = document.getElementById('html5-audio');
+  const directAudioUrl = config.music?.audioUrl || '';
+
+  if (html5Audio && directAudioUrl) {
+    html5Audio.src = directAudioUrl;
+    html5Audio.volume = currentVolume / 100;
+    html5Audio.addEventListener('play', () => setMusicUIPlaying(true));
+    html5Audio.addEventListener('pause', () => setMusicUIPlaying(false));
+    html5Audio.addEventListener('ended', () => {
+      html5Audio.currentTime = 0;
+      html5Audio.play();
+    });
+  }
 
   function initYouTubePlayer() {
+    if (directAudioUrl) return;
+
     const youtubeId = config.music?.youtubeId || 'iywHwg1ZO8s';
-    const defaultVol = config.music?.defaultVolume !== undefined ? config.music.defaultVolume : 80;
+    const isHttp = window.location.protocol.startsWith('http');
 
     try {
       ytPlayer = new YT.Player('yt-player-container', {
@@ -805,12 +955,17 @@
           showinfo: 0,
           modestbranding: 1,
           rel: 0,
+          ...(isHttp ? { origin: window.location.origin } : {})
         },
         events: {
-          onReady: (event) => {
+          onReady: () => {
+            ytPlayerReady = true;
             try {
               if (ytPlayer && typeof ytPlayer.setVolume === 'function') {
-                ytPlayer.setVolume(defaultVol);
+                ytPlayer.setVolume(currentVolume);
+              }
+              if (state.musicPlaying) {
+                ytPlayer.playVideo();
               }
             } catch (err) {}
           },
@@ -821,10 +976,18 @@
               setMusicUIPlaying(false);
             }
           },
+          onError: (err) => {
+            console.warn('YouTube Player error, beralih ke Synth BGM offline:', err);
+            useFallbackBGM = true;
+            if (state.musicPlaying) {
+              AudioFX.startRomanticBGM(currentVolume);
+            }
+          }
         },
       });
     } catch (e) {
       console.warn('YouTube Player fallback:', e);
+      useFallbackBGM = true;
     }
   }
 
@@ -832,28 +995,57 @@
     initYouTubePlayer();
   } else {
     window.onYouTubeIframeAPIReady = initYouTubePlayer;
+    setTimeout(() => {
+      if (!ytPlayerReady && !directAudioUrl) {
+        useFallbackBGM = true;
+      }
+    }, 4000);
   }
 
   function playMusic() {
-    if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+    state.musicPlaying = true;
+    AudioFX.init();
+
+    // 1. Prioritas Audio HTML5 jika ada file .mp3
+    if (directAudioUrl && html5Audio) {
+      html5Audio.play().then(() => {
+        setMusicUIPlaying(true);
+      }).catch(() => {
+        AudioFX.startRomanticBGM(isMuted ? 0 : currentVolume);
+        setMusicUIPlaying(true);
+      });
+      return;
+    }
+
+    // 2. Prioritas YouTube Iframe
+    if (ytPlayer && ytPlayerReady && !useFallbackBGM && typeof ytPlayer.playVideo === 'function') {
       try {
         ytPlayer.playVideo();
         setMusicUIPlaying(true);
+        return;
       } catch (e) {
-        console.warn('Play video failed:', e);
+        console.warn('Play video failed, switching to synth:', e);
       }
     }
+
+    // 3. Fallback Web Audio API (Offline & 100% Reliabel)
+    AudioFX.startRomanticBGM(isMuted ? 0 : currentVolume);
+    setMusicUIPlaying(true);
   }
 
   function pauseMusic() {
-    if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
-      try {
-        ytPlayer.pauseVideo();
-        setMusicUIPlaying(false);
-      } catch (e) {
-        console.warn('Pause video failed:', e);
-      }
+    state.musicPlaying = false;
+
+    if (directAudioUrl && html5Audio) {
+      try { html5Audio.pause(); } catch (e) {}
     }
+
+    if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+      try { ytPlayer.pauseVideo(); } catch (e) {}
+    }
+
+    AudioFX.stopRomanticBGM();
+    setMusicUIPlaying(false);
   }
 
   function toggleMusic() {
@@ -881,7 +1073,11 @@
     }
 
     if (musicStatus) {
-      musicStatus.textContent = isPlaying ? 'Memutar Musik Romantis ♡' : 'Ketuk untuk putar 🎵';
+      if (isMuted) {
+        musicStatus.textContent = 'Musik Dibisukan 🔇';
+      } else {
+        musicStatus.textContent = isPlaying ? 'Memutar Musik Romantis ♡' : 'Ketuk untuk putar 🎵';
+      }
     }
   }
 
@@ -898,19 +1094,32 @@
 
     // Kontrol Volume
     if (volSlider) {
+      volSlider.value = currentVolume;
       volSlider.addEventListener('input', (e) => {
         e.stopPropagation();
         const val = parseInt(e.target.value, 10);
-        if (ytPlayer && typeof ytPlayer.setVolume === 'function') {
-          ytPlayer.setVolume(val);
-          if (val === 0) {
-            ytPlayer.mute();
-            if (volToggle) volToggle.textContent = '🔇';
-          } else {
-            ytPlayer.unMute();
-            if (volToggle) volToggle.textContent = val < 40 ? '🔉' : '🔊';
-          }
+        currentVolume = val;
+        isMuted = (val === 0);
+
+        if (html5Audio) {
+          html5Audio.volume = val / 100;
+          html5Audio.muted = isMuted;
         }
+
+        if (ytPlayer && typeof ytPlayer.setVolume === 'function') {
+          try {
+            ytPlayer.setVolume(val);
+            if (isMuted) ytPlayer.mute();
+            else ytPlayer.unMute();
+          } catch (err) {}
+        }
+
+        AudioFX.setBGMVolume(isMuted ? 0 : val);
+
+        if (volToggle) {
+          volToggle.textContent = isMuted ? '🔇' : (val < 40 ? '🔉' : '🔊');
+        }
+        setMusicUIPlaying(state.musicPlaying);
       });
       volSlider.addEventListener('click', (e) => e.stopPropagation());
     }
@@ -919,22 +1128,37 @@
       volToggle.addEventListener('click', (e) => {
         e.stopPropagation();
         AudioFX.playTap();
-        if (ytPlayer && typeof ytPlayer.isMuted === 'function') {
-          if (ytPlayer.isMuted()) {
-            ytPlayer.unMute();
-            volToggle.textContent = '🔊';
-            const cur = (typeof ytPlayer.getVolume === 'function' ? ytPlayer.getVolume() : 80) || 80;
-            if (volSlider) volSlider.value = cur;
-          } else {
-            ytPlayer.mute();
-            volToggle.textContent = '🔇';
-            if (volSlider) volSlider.value = 0;
+        isMuted = !isMuted;
+
+        if (isMuted) {
+          if (html5Audio) html5Audio.muted = true;
+          if (ytPlayer && typeof ytPlayer.mute === 'function') {
+            try { ytPlayer.mute(); } catch (err) {}
           }
+          AudioFX.setBGMVolume(0);
+          volToggle.textContent = '🔇';
+          if (volSlider) volSlider.value = 0;
+        } else {
+          const val = currentVolume || 80;
+          if (html5Audio) {
+            html5Audio.muted = false;
+            html5Audio.volume = val / 100;
+          }
+          if (ytPlayer && typeof ytPlayer.unMute === 'function') {
+            try {
+              ytPlayer.unMute();
+              ytPlayer.setVolume(val);
+            } catch (err) {}
+          }
+          AudioFX.setBGMVolume(val);
+          volToggle.textContent = val < 40 ? '🔉' : '🔊';
+          if (volSlider) volSlider.value = val;
         }
+        setMusicUIPlaying(state.musicPlaying);
       });
     }
 
-    // Unmute / Autoplay trigger pada gestur pertama
+    // Unmute / AudioContext trigger pada gestur pertama
     const unlockAudio = () => {
       AudioFX.init();
       document.removeEventListener('click', unlockAudio);

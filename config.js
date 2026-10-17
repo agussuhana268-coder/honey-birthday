@@ -314,10 +314,14 @@ window.BIRTHDAY_CONFIG = {
     closeButtonText: "Peluk Erat & Simpan di Hati ♡"
   },
 
-  // === 10. MUSIK LATAR (YOUTUBE BACKGROUND PLAYER) ===
-  // Lagu romantis dari YouTube: https://youtu.be/iywHwg1ZO8s
+  // === 10. MUSIK LATAR (YOUTUBE & MP3 BACKGROUND PLAYER) ===
+  // Prioritas pemutaran:
+  // 1. Jika audioUrl diisi (misal './assets/music.mp3' atau URL file mp3 online), musik akan diputar via audio HTML5 langsung.
+  // 2. Jika audioUrl kosong, otomatis memutar video YouTube berdasarkan youtubeId (default).
+  // 3. Jika offline atau YouTube diblokir, sistem otomatis memutar melodi musik box romantis sintesis (Web Audio API).
   music: {
-    youtubeId: "iywHwg1ZO8s",
+    youtubeId: "iywHwg1ZO8s", // Lagu romantis: Cassandra - Cinta Terbaik (Akustik)
+    audioUrl: "",              // Opsional: link .mp3 langsung atau './assets/music.mp3'
     title: "Our Special Birthday Song",
     artist: "For [AYU TRI SAYANGG] ♡",
     defaultVolume: 80,
