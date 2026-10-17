@@ -17,9 +17,9 @@
 
 window.BIRTHDAY_CONFIG = {
   // === IDENTITAS UTAMA ===
-  girlfriendName: "[AYU TRI SAYANGG]",
-  nickname: "[SAYANGGKUU]",
-  senderName: "[KHOLIK]",
+  girlfriendName: "AYU TRI SAYANGG",
+  nickname: "SAYANGGKUU",
+  senderName: "KHOLIK",
 
   // === TANGGAL ULANG TAHUN ===
   birthdayDateDisplay: "18 Oktober",
@@ -29,11 +29,11 @@ window.BIRTHDAY_CONFIG = {
   // PIN default: 181008 (format: 18 • 10 • 08)
   pinCode: "181008",
   pinDisplayHint: "18 • 10 • 08",
-  pinHintText: "Gunakan tanggal spesial kita ♡",
+  pinHintText: "Gunakan tanggal hari special sayangg ♡",
   
   // Pesan lucu & menggemaskan jika salah memasukkan PIN
   pinErrorMessages: [
-    "Aduh ayanggg masa lupa tanggal spesial kita sih? 🥺💔",
+    "Aduh sayanggg masa lupa tanggal spesial sayangg sih? 🥺💔",
     "Eits salah! Pikir baik-baik lagi ya bidadariku... 🎀",
     "Hayo denda peluk 10 detik kalau salah lagi! 😜💕",
     "Bukan itu cintakuuu, coba diingat-ingat lagi... 🌸",
@@ -62,7 +62,7 @@ window.BIRTHDAY_CONFIG = {
   // === 3. HALAMAN UTAMA (BERANDA & UCAPAN) ===
   hero: {
     tagline: "Happy Birthday to My Favorite Human 🌸",
-    title: "Selamat Ulang Tahun, [AYU TRI SAYANGG] ♡",
+    title: "Selamat Ulang Tahun Sayanggkuu ♡",
     subtitle: "Hari ini, semesta merayakan hadirnya dirimu. Dan aku merayakan hari di mana wanita paling istimewa dilahirkan ke dunia.",
     scrollHint: "Gulir ke bawah untuk melihat cerita kita 💖",
   },
@@ -70,8 +70,8 @@ window.BIRTHDAY_CONFIG = {
   // === WISH & PESAN MANIS ===
   birthdayWish: {
     title: "Doa & Harapan Terdalam",
-    quote: "Selamat ulang tahun, [SAYANGGKUU]. Semoga di lembaran usiamu yang baru ini, kamu selalu dihujani kebahagiaan yang membuat matamu berbinar, kedamaian yang menenangkan hatimu, dan cinta yang selalu mengingatkanmu betapa berharganya dirimu. Terima kasih sudah menjadi dirimu sendiri, dan membuat setiap hariku jauh lebih indah.",
-    signature: "Selamanya milikmu, [KHOLIK] ♡",
+    quote: "Selamat ulang tahun, Sayanggkuu. Semoga di lembaran usiamu yang baru ini, kamu selalu dihujani kebahagiaan yang membuat matamu berbinar, kedamaian yang menenangkan hatimu, dan cinta yang selalu mengingatkanmu betapa berharganya dirimu. Terima kasih sudah menjadi dirimu sendiri, dan membuat setiap hariku jauh lebih indah.",
+    signature: "Selamanya milikmu, Kholik ♡",
   },
 
   // === KUE ULANG TAHUN INTERAKTIF ===
@@ -80,7 +80,7 @@ window.BIRTHDAY_CONFIG = {
     title: "Make a Birthday Wish ♡",
     instruction: "Tutup matamu sejenak, buat satu harapan paling indah dalam hatimu, lalu tiup lilinnya ya...",
     blowButtonText: "Tiup Lilin 🕯️",
-    wishGrantedMessage: "Semoga semua doa dan harapanmu terkabul, [SAYANGGKUU] tercinta! 🌸✨",
+    wishGrantedMessage: "Semoga semua doa dan harapanmu terkabul, Sayanggkuu tercinta! 🌸✨",
     relightButtonText: "Nyalakan Lilin Lagi ✨",
   },
 
@@ -153,12 +153,12 @@ window.BIRTHDAY_CONFIG = {
   // === 5. SURAT CINTA (AMPLOP INTERAKTIF & EFEK KETIK) ===
   loveLetter: {
     badge: "Surat Dari Lubuk Hati 💌",
-    title: "Surat Cinta Untuk [SAYANGGKUU]",
+    title: "Surat Cinta Untuk Sayanggkuu",
     subtitle: "Untaian kata yang kutulis khusus untukmu di hari bertambahnya usiamu.",
-    envelopeLabel: "UNTUK: [AYU TRI SAYANGG] ♡",
+    envelopeLabel: "UNTUK: AYU TRI SAYANGG ♡",
     stampText: "SPECIAL DELIVERY • WITH LOVE 🎀",
     dateText: "18 Oktober 2008 • Special Edition",
-    greeting: "Untuk [AYU TRI SAYANGG], cinta dalam hidupku,",
+    greeting: "Untuk Sayanggkuu, cinta dalam hidupku,",
     paragraphs: [
       "Selamat ulang tahun untuk perempuan yang telah membuat duniaku jauh lebih lembut, lebih cerah, dan penuh warna.",
       "Jika ada satu hal yang ingin kuberikan kepadamu hari ini, itu adalah kesempatan untuk melihat dirimu sendiri melalui mataku. Supaya kamu tahu betapa luar biasanya dirimu, bagaimana senyumanmu bisa meredakan hari-hariku yang berat, dan betapa besar rasa syukurku karena memilikimu di sisiku.",
@@ -166,10 +166,10 @@ window.BIRTHDAY_CONFIG = {
       "Di usiamu yang baru ini, aku berdoa agar kamu selalu diberikan kesehatan, ketenangan jiwa, langkah yang dimudahkan, serta alasan tak terhingga untuk tersenyum setiap harinya.",
       "Terima kasih sudah menjadi bagian terindah dalam ceritaku. Aku ingin terus menemani langkahmu, merayakan setiap ulang tahunmu, dan membuat lebih banyak kenangan manis bersamamu.",
       "Hari ini adalah harimu, sayangku. Kamu pantas mendapatkan semua cinta, kehangatan, dan hal-hal terindah yang ada di dunia ini.",
-      "Selamat ulang tahun, [SAYANGGKUU] tercinta."
+      "Selamat ulang tahun, Sayanggkuu tercinta."
     ],
     closing: "Dengan segenap cintaku,",
-    senderSign: "[KHOLIK] ♡",
+    senderSign: "Kholik ♡",
     openButtonText: "Buka Surat Cinta 💌",
     skipButtonText: "Tampilkan Semua Teks ✨",
     reopenButtonText: "Lipat & Buka Ulang ✉️",
@@ -309,8 +309,8 @@ window.BIRTHDAY_CONFIG = {
     buttonText: "Buka Kejutan Terakhir 🎁",
     modalBadge: "For My Most Precious Girl 💖",
     modalTitle: "Janji Cintaku Untukmu ♡",
-    modalMessage: "Dari miliaran manusia di bumi, aku sangat bersyukur takdir mempertemukanku denganmu. Selamat ulang tahun, [AYU TRI SAYANGG]. Jika aku diberi kesempatan untuk mengulang waktu berkali-kali, aku akan tetap memilihmu. Hari ini, esok, dan di setiap detik dalam hidupku.",
-    modalSign: "Dibuat dengan segenap cinta, khusus untuk [AYU TRI SAYANGG] dari [KHOLIK] 💖",
+    modalMessage: "Dari miliaran manusia di bumi, aku sangat bersyukur takdir mempertemukanku denganmu. Selamat ulang tahun, Sayanggkuu. Jika aku diberi kesempatan untuk mengulang waktu berkali-kali, aku akan tetap memilihmu. Hari ini, esok, dan di setiap detik dalam hidupku.",
+    modalSign: "Dibuat dengan segenap cinta, khusus untuk sayanggkuu dari pacarmuu 💖",
     closeButtonText: "Peluk Erat & Simpan di Hati ♡"
   },
 
@@ -323,7 +323,7 @@ window.BIRTHDAY_CONFIG = {
     youtubeId: "iywHwg1ZO8s", // Lagu romantis: Cassandra - Cinta Terbaik (Akustik)
     audioUrl: "",              // Opsional: link .mp3 langsung atau './assets/music.mp3'
     title: "Our Special Birthday Song",
-    artist: "For [AYU TRI SAYANGG] ♡",
+    artist: "For Sayanggkuu ♡",
     defaultVolume: 80,
     autoplayNotice: "Ketuk di mana saja untuk memutar musik romantis 🎵"
   }
