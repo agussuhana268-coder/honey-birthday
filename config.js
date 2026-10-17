@@ -93,28 +93,28 @@ window.BIRTHDAY_CONFIG = {
     photos: [
       {
         src: "./assets/images/photo-1.jpg",
-        title: "Senyum Terindah",
+        title: "Bocilna Atuu",
         caption: "Salah satu momen favoritku saat bersamamu ♡",
         date: "Kenangan #1",
         sticker: "🎀"
       },
       {
         src: "./assets/images/photo-2.jpg",
-        title: "Hari yang Istimewa",
-        caption: "Momen yang selalu ingin kuputar kembali setiap saat.",
+        title: "Bocil Bergaya",
+        caption: "Momen pacaran dibangku teras.",
         date: "Kenangan #2",
         sticker: "✨"
       },
       {
         src: "./assets/images/photo-3.jpg",
-        title: "Golden Hour Bersamamu",
-        caption: "Kamu membuat hari yang biasa saja menjadi begitu luar biasa.",
+        title: "Sunset Romantis",
+        caption: "Langitpun kalah indah denganmu sayangg.",
         date: "Kenangan #3",
         sticker: "🌸"
       },
       {
         src: "./assets/images/photo-4.jpg",
-        title: "Hanya Kita Berdua",
+        title: "Nacii Padangg",
         caption: "Tatap matamu selalu menjadi tempat paling tenang di dunia.",
         date: "Kenangan #4",
         sticker: "💌"
@@ -128,14 +128,14 @@ window.BIRTHDAY_CONFIG = {
       },
       {
         src: "./assets/images/photo-6.jpg",
-        title: "Tawa Paling Tulus",
+        title: "Hangat dan Nyaman",
         caption: "Petualangan dan cerita manis bersama orang terfavoritku.",
         date: "Kenangan #6",
         sticker: "🧸"
       },
       {
         src: "./assets/images/photo-7.jpg",
-        title: "Pelukan Terhangat",
+        title: "Cinta Paling Tulus",
         caption: "Bersamamu adalah rasa aman dan kebahagiaan yang sesungguhnya.",
         date: "Kenangan #7",
         sticker: "🍯"
@@ -220,22 +220,22 @@ window.BIRTHDAY_CONFIG = {
       {
         id: 6,
         number: "#06",
-        title: "Notifikasi Paling Kutunggu",
-        desc: "Melihat namamu muncul di layar ponsel selalu berhasil membuat bibirku tersenyum tanpa sadar setiap harinya.",
+        title: "Orang Paling Ku Sayang",
+        desc: "Terimakasih sudah membuatku merasa dipedulikan dan disayangi, Sayanggkuu. I always love you.",
         emoji: "💬"
       },
       {
         id: 7,
         number: "#07",
-        title: "Tingkah Lucumu Yang Menggemaskan",
-        desc: "Caramu bercerita dengan ceria, ekspresi wajahmu yang lucu, bahkan saat kamu lagi ngambek pun tetap sangat menggemaskan.",
+        title: "Tingkah Lucu Sayangg Yang Gemess",
+        desc: "Caramu bercerita dengan ceria, ekspresi wajahmu yang lucu dan karena kamu bocil gemoyyy.",
         emoji: "🥰"
       },
       {
         id: 8,
         number: "#08",
         title: "Karena Kamu Adalah Kamu",
-        desc: "Bukan karena syarat apa pun, tapi karena kamu adalah dirimu sendiri—anugerah terindah yang selalu kusyukuri setiap detik.",
+        desc: "Bukan karena syarat apa pun, tapi karena kamu adalah dirimu sendiri anugerah terindah yang selalu kusyukuri setiap detik.",
         emoji: "🎀"
       }
     ]
@@ -263,15 +263,15 @@ window.BIRTHDAY_CONFIG = {
       },
       {
         id: 3,
-        title: "Kupon Jadi Ratu Seharian",
-        desc: "Hari ini semua maumu dituruti dan aku siap jadi asisten pribadimu yang paling setia.",
+        title: "Kupon Jadi Ratu Selamanya",
+        desc: "Selamanya semua maumu dituruti dan aku siap jadi asisten pribadimu yang paling setia.",
         icon: "👑",
         validity: "Khusus Untukmu ♡"
       },
       {
         id: 4,
         title: "Kupon Jalan-Jalan & Ngedate Santai",
-        desc: "Jalan santai, hunting foto, nonton bioskop, atau nongkrong berdua di tempat favoritmu.",
+        desc: "Jalan jalan, photobooth, atau nongkrong berdua di tempat favorit kita.",
         icon: "🚗",
         validity: "Kapan Saja ♡"
       },
@@ -285,7 +285,7 @@ window.BIRTHDAY_CONFIG = {
       {
         id: 6,
         title: "Kupon Maaf & Bebas Ngambek",
-        desc: "Gunakan kupon ini saat aku bikin kesel, dan aku wajib minta maaf serta belikan camilan enak.",
+        desc: "Gunakan kupon ini saat aku bikin kesel, dan aku wajib minta maaf.",
         icon: "🥺",
         validity: "Anti Kedaluwarsa ♡"
       }
@@ -322,7 +322,7 @@ window.BIRTHDAY_CONFIG = {
   music: {
     youtubeId: "iywHwg1ZO8s", // Lagu romantis: Cassandra - Cinta Terbaik (Akustik)
     audioUrl: "",              // Opsional: link .mp3 langsung atau './assets/music.mp3'
-    title: "Our Special Birthday Song",
+    title: "Special Birthday Song",
     artist: "For Sayanggkuu ♡",
     defaultVolume: 80,
     autoplayNotice: "Ketuk di mana saja untuk memutar musik romantis 🎵"
