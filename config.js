@@ -1,6 +1,6 @@
 /**
  * =========================================================================
- * 💖 KONFIGURASI WEBSITE ULANG TAHUN ROMANTIS 💖
+ * 💖 KONFIGURASI WEBSITE ULANG TAHUN ROMANTIS (HONEY BIRTHDAY) 💖
  * =========================================================================
  * 
  * PANDUAN MUDAH EDIT:
@@ -30,7 +30,17 @@ window.BIRTHDAY_CONFIG = {
   pinCode: "181008",
   pinDisplayHint: "18 • 10 • 08",
   pinHintText: "Gunakan tanggal spesial kita ♡",
-  pinErrorMessage: "Hehe, salah sayang... coba lagi ya ♡",
+  
+  // Pesan lucu & menggemaskan jika salah memasukkan PIN
+  pinErrorMessages: [
+    "Aduh ayanggg masa lupa tanggal spesial kita sih? 🥺💔",
+    "Eits salah! Pikir baik-baik lagi ya bidadariku... 🎀",
+    "Hayo denda peluk 10 detik kalau salah lagi! 😜💕",
+    "Bukan itu cintakuuu, coba diingat-ingat lagi... 🌸",
+    "Kunci hatiku belum pas nih, masa kamu lupa sih manis? ✨",
+    "Hehe salah lagi, gemes banget! Coba pelan-pelan ya ayang ♡",
+    "Waduh denda cium pipi nih kalau sampai salah terus! 🥰💌"
+  ],
 
   // === 1. SPLASH SCREEN (BUKA KADO) ===
   splash: {
@@ -140,7 +150,7 @@ window.BIRTHDAY_CONFIG = {
     ]
   },
 
-  // === 5. SURAT CINTA (AMPLOP INTERAKTIF) ===
+  // === 5. SURAT CINTA (AMPLOP INTERAKTIF & EFEK KETIK) ===
   loveLetter: {
     badge: "Surat Dari Lubuk Hati 💌",
     title: "Surat Cinta Untuk [SAYANGGKUU]",
@@ -152,8 +162,8 @@ window.BIRTHDAY_CONFIG = {
     paragraphs: [
       "Selamat ulang tahun untuk perempuan yang telah membuat duniaku jauh lebih lembut, lebih cerah, dan penuh warna.",
       "Jika ada satu hal yang ingin kuberikan kepadamu hari ini, itu adalah kesempatan untuk melihat dirimu sendiri melalui mataku. Supaya kamu tahu betapa luar biasanya dirimu, bagaimana senyumanmu bisa meredakan hari-hariku yang berat, dan betapa besar rasa syukurku karena memilikimu di sisiku.",
-      "Mungkin aku tidak selalu pandai merangkai kata-kata manis, dan mungkin aku tidak selalu sempurna dalam mengungkapkannya. Tapi percayalah, kamu sangat berarti bagiku, lebih dari yang bisa kuutarakan.",
-      "Di usiamu yang baru ini, aku berdoa agar kamu diberikan kesehatan, ketenangan jiwa, langkah yang dimudahkan, serta alasan tak terhingga untuk tersenyum setiap harinya.",
+      "Mungkin aku tidak selalu pandai merangkai kata-kata manis, dan mungkin aku tidak selalu sempurna dalam mengungkapkannya. Tapi percayalah, kamu sangat berarti bagiku, lebih dari yang bisa kuutarakan dengan kata-kata.",
+      "Di usiamu yang baru ini, aku berdoa agar kamu selalu diberikan kesehatan, ketenangan jiwa, langkah yang dimudahkan, serta alasan tak terhingga untuk tersenyum setiap harinya.",
       "Terima kasih sudah menjadi bagian terindah dalam ceritaku. Aku ingin terus menemani langkahmu, merayakan setiap ulang tahunmu, dan membuat lebih banyak kenangan manis bersamamu.",
       "Hari ini adalah harimu, sayangku. Kamu pantas mendapatkan semua cinta, kehangatan, dan hal-hal terindah yang ada di dunia ini.",
       "Selamat ulang tahun, [SAYANGGKUU] tercinta."
@@ -183,14 +193,14 @@ window.BIRTHDAY_CONFIG = {
         id: 2,
         number: "#02",
         title: "Hal Biasa Menjadi Istimewa",
-        desc: "Bahkan sekadar obrolan random di malam hari atau berjalan santai berdua terasa seperti momen terbaik dalam hidupku.",
+        desc: "Bahkan sekadar obrolan santai di malam hari atau berjalan pelan berdua terasa seperti momen terbaik dalam hidupku.",
         emoji: "🪄"
       },
       {
         id: 3,
         number: "#03",
         title: "Hatimu Yang Begitu Tulus & Lembut",
-        desc: "Caramu peduli, kebaikan hatimu yang tulus, dan ketulusanmu membuatku selalu mengagumi kepribadianmu.",
+        desc: "Caramu peduli, kebaikan hatimu yang murni, dan ketulusanmu membuatku selalu mengagumi kepribadianmu.",
         emoji: "🤍"
       },
       {
@@ -218,7 +228,7 @@ window.BIRTHDAY_CONFIG = {
         id: 7,
         number: "#07",
         title: "Tingkah Lucumu Yang Menggemaskan",
-        desc: "Caramu bercerita dengan ceria, ekspresi wajahmu yang lucu, bahkan saat kamu ngambek pun tetap sangat menggemaskan.",
+        desc: "Caramu bercerita dengan ceria, ekspresi wajahmu yang lucu, bahkan saat kamu lagi ngambek pun tetap sangat menggemaskan.",
         emoji: "🥰"
       },
       {
@@ -231,7 +241,67 @@ window.BIRTHDAY_CONFIG = {
     ]
   },
 
-  // === 7. KEJUTAN TERAKHIR (CONFETTI & POPUP CINTA) ===
+  // === 7. KUPON CINTA SPESIAL (LOVE COUPONS) ===
+  coupons: {
+    badge: "Hadiah Cinta Eksklusif 🎟️",
+    title: "Kupon Cinta Spesial Untukmu",
+    subtitle: "Kupon-kupon ini bisa kamu klaim kapan saja dan berlaku selamanya tanpa batas waktu ♡",
+    items: [
+      {
+        id: 1,
+        title: "Kupon Peluk & Manja Sepuasnya",
+        desc: "Bisa diklaim kapan saja saat kamu lagi capek, sedih, atau kangen pengen dipeluk erat.",
+        icon: "🫂",
+        validity: "Berlaku Selamanya ♡"
+      },
+      {
+        id: 2,
+        title: "Kupon Ditraktir Makanan Favorit",
+        desc: "Bebas pilih makanan, dessert, atau minuman manis apa saja yang lagi kamu inginkan.",
+        icon: "🍰",
+        validity: "Tanpa Batas ♡"
+      },
+      {
+        id: 3,
+        title: "Kupon Jadi Ratu Seharian",
+        desc: "Hari ini semua maumu dituruti dan aku siap jadi asisten pribadimu yang paling setia.",
+        icon: "👑",
+        validity: "Khusus Untukmu ♡"
+      },
+      {
+        id: 4,
+        title: "Kupon Jalan-Jalan & Ngedate Santai",
+        desc: "Jalan santai, hunting foto, nonton bioskop, atau nongkrong berdua di tempat favoritmu.",
+        icon: "🚗",
+        validity: "Kapan Saja ♡"
+      },
+      {
+        id: 5,
+        title: "Kupon Didengarkan Curhat 24 Jam",
+        desc: "Telinga dan bahu yang selalu siap mendengar semua ceritamu sampai hatimu benar-benar lega.",
+        icon: "💬",
+        validity: "24/7 Siap Sedia ♡"
+      },
+      {
+        id: 6,
+        title: "Kupon Maaf & Bebas Ngambek",
+        desc: "Gunakan kupon ini saat aku bikin kesel, dan aku wajib minta maaf serta belikan camilan enak.",
+        icon: "🥺",
+        validity: "Anti Kedaluwarsa ♡"
+      }
+    ]
+  },
+
+  // === 8. PESAN RAHASIA TERSEMBUNYI (SECRET MESSAGE) ===
+  secretMessage: {
+    badge: "Bisikan Rahasia Tersembunyi 🤫💌",
+    title: "Ada Satu Pesan Rahasia...",
+    subtitle: "Ketuk amplop rahasia ini untuk membuka apa yang selama ini tersimpan di lubuk hatiku paling dalam ♡",
+    hint: "Ketuk untuk membuka pesan rahasia 🎀",
+    content: "Di setiap doa yang kupanjatkan di sepertiga malam, namamu tidak pernah absen kusebut. Aku tidak hanya mencintai caramu tersenyum, tapi aku juga mencintai ketulusan dan kebaikan hatimu. Terima kasih sudah memilihku untuk berjalan bersamamu. Aku berjanji akan selalu berusaha menjaga senyum manismu itu selamanya.",
+  },
+
+  // === 9. KEJUTAN TERAKHIR (CONFETTI & POPUP CINTA) ===
   finalSurprise: {
     badge: "Satu Bisikan Terakhir 💝",
     title: "Kejutan Spesial Terakhir",
@@ -244,12 +314,13 @@ window.BIRTHDAY_CONFIG = {
     closeButtonText: "Peluk Erat & Simpan di Hati ♡"
   },
 
-  // === 8. MUSIK YOUTUBE ===
+  // === 10. MUSIK LATAR (YOUTUBE BACKGROUND PLAYER) ===
   // Lagu romantis dari YouTube: https://youtu.be/iywHwg1ZO8s
   music: {
     youtubeId: "iywHwg1ZO8s",
     title: "Our Special Birthday Song",
     artist: "For [AYU TRI SAYANGG] ♡",
+    defaultVolume: 80,
     autoplayNotice: "Ketuk di mana saja untuk memutar musik romantis 🎵"
   }
 };

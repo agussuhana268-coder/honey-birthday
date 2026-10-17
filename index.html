@@ -25,16 +25,22 @@
   <!-- Container IFrame YouTube Tersembunyi (Audio Background) -->
   <div id="yt-player-container"></div>
 
-  <!-- Floating Music Player Widget -->
-  <aside class="floating-music-player" id="floating-music-player" title="Ketuk untuk putar / jeda musik">
-    <div class="vinyl-disc" id="vinyl-disc">
+  <!-- Floating Music Player Widget with Volume Control -->
+  <aside class="floating-music-player" id="floating-music-player" aria-label="Pemutar Musik Romantis">
+    <div class="vinyl-disc" id="vinyl-disc" title="Putar / Jeda Musik">
       <div class="vinyl-center"></div>
     </div>
-    <div class="music-info">
+    <div class="music-info" id="music-info-toggle" title="Putar / Jeda Musik">
       <span class="music-title" id="music-player-title">Our Special Song</span>
-      <span class="music-status" id="music-status">Ketuk untuk putar</span>
+      <span class="music-status" id="music-status">Ketuk untuk putar 🎵</span>
     </div>
-    <button class="music-btn" id="music-toggle-btn" aria-label="Play or Pause">▶</button>
+    <div class="music-controls">
+      <button class="music-btn" id="music-toggle-btn" title="Play / Pause" aria-label="Play or Pause">▶</button>
+      <div class="music-volume-box">
+        <button class="music-vol-icon-btn" id="music-vol-toggle" title="Mute / Unmute" aria-label="Mute or Unmute">🔊</button>
+        <input type="range" min="0" max="100" value="80" class="music-volume-slider" id="music-volume-slider" title="Volume Suara" aria-label="Volume Musik" />
+      </div>
+    </div>
   </aside>
 
   <!-- =========================================================================
@@ -105,6 +111,9 @@
       </div>
     </div>
   </div>
+
+  <!-- Romantic Transition Overlay -->
+  <div id="romantic-flash-overlay"></div>
 
   <!-- =========================================================================
        3. MAIN CONTENT (WEBSITE UTAMA SETELAH TERBUKA)
@@ -246,10 +255,43 @@
       </div>
     </section>
 
-    <!-- SECTION 6: FINAL SURPRISE & CONFETTI -->
+    <!-- SECTION 6: KUPON CINTA SPESIAL (LOVE COUPONS) -->
+    <section id="coupons">
+      <div class="container">
+        <div class="section-header">
+          <span class="coquette-badge" id="coupons-badge">Hadiah Cinta Eksklusif 🎟️</span>
+          <h2 class="coquette-title" id="coupons-title">Kupon Cinta Spesial Untukmu</h2>
+          <p class="coquette-subtitle" id="coupons-subtitle">Kupon-kupon ini bisa kamu klaim kapan saja dan berlaku selamanya tanpa batas waktu ♡</p>
+          <div class="ribbon-divider">🎀</div>
+        </div>
+
+        <!-- Love Coupons Grid -->
+        <div class="coupons-grid" id="coupons-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: SECRET MESSAGE & FINAL SURPRISE -->
     <section id="surprise">
       <div class="container">
-        <div class="surprise-card">
+        <!-- Secret Message Envelope / Tap to Reveal -->
+        <div class="secret-box" id="secret-box">
+          <span class="coquette-badge" id="secret-badge">Bisikan Rahasia Tersembunyi 🤫💌</span>
+          <h3 class="coquette-title" style="font-size: 1.5rem; margin-bottom: 8px;" id="secret-title">Ada Satu Pesan Rahasia...</h3>
+          <p class="coquette-subtitle" id="secret-subtitle">Ketuk amplop rahasia ini untuk membuka apa yang selama ini tersimpan di lubuk hatiku paling dalam ♡</p>
+          
+          <div class="secret-interactive-wrapper" id="secret-trigger" title="Ketuk untuk membuka pesan rahasia">
+            <div class="secret-sealed" id="secret-sealed">
+              <span class="secret-wax">🔒</span>
+              <span class="secret-sealed-text" id="secret-hint">Ketuk untuk membuka pesan rahasia 🎀</span>
+            </div>
+            <div class="secret-content hidden" id="secret-content-box">
+              <p class="secret-text" id="secret-text"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grand Final Surprise Card -->
+        <div class="surprise-card" style="margin-top: 45px;">
           <div class="surprise-heart-icon">💝</div>
           <span class="coquette-badge" id="surprise-badge">Satu Bisikan Terakhir 💝</span>
           <h2 class="coquette-title" id="surprise-title">Kejutan Spesial Terakhir</h2>
@@ -293,6 +335,10 @@
       <a href="#reasons" class="nav-link">
         <span class="nav-icon">💖</span>
         <span>Alasan</span>
+      </a>
+      <a href="#coupons" class="nav-link">
+        <span class="nav-icon">🎟️</span>
+        <span>Kupon</span>
       </a>
       <a href="#surprise" class="nav-link">
         <span class="nav-icon">🎁</span>
