@@ -71,14 +71,16 @@ PIN default adalah `181008` (sesuai format tanggal `18 • 10 • 08`). Jika ing
   pinDisplayHint: "18 • 10 • 08", // Tampilan teks dekorasi di atas keypad
 ```
 
-### 3. Mengganti Musik YouTube
-Lagu default menggunakan ID YouTube: `iywHwg1ZO8s` (dari link `https://youtu.be/iywHwg1ZO8s`).
-Jika ingin mengganti lagu:
-1. Salin 11 karakter kode video dari link YouTube yang kamu inginkan (misal `https://youtu.be/AbCdEfGhIjK` -> kodenya adalah `AbCdEfGhIjK`).
-2. Masukkan ke bagian:
+### 3. Mengganti Musik (YouTube atau File MP3 Langsung)
+Sistem pemutar musik mendukung 3 mode otomatis:
+1. **File MP3 Sendiri (Paling Cepat & Pasti Berbunyi di Semua Browser)**: Cukup letakkan file lagu `.mp3` (misal `assets/lagu.mp3`) atau link file mp3 online ke bagian `audioUrl`.
+2. **Video YouTube**: Masukkan 11 karakter kode ID video YouTube (default: `iywHwg1ZO8s` - Cassandra Cinta Terbaik Fingerstyle).
+3. **Melodi Romantis Otomatis (Offline)**: Jika YouTube sedang diblokir/offline, website otomatis memainkan melodi musik box romantis sintesis murni tanpa hening!
+
 ```javascript
   music: {
-    youtubeId: "iywHwg1ZO8s", // Ganti dengan ID video YouTube baru
+    youtubeId: "iywHwg1ZO8s", // ID video YouTube pilihanmu
+    audioUrl: "",              // Opsional: link audio mp3 lokal './assets/lagu.mp3' atau URL mp3
     title: "Our Special Birthday Song",
     defaultVolume: 80,
   }
